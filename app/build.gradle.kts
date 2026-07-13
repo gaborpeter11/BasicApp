@@ -2,19 +2,19 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("com.google.dagger.hilt.android")
-    id("org.jetbrains.kotlin.kapt")
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.20"
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.hilt.android)
 }
 
 android {
-    namespace = "com.example.basicapp"
-    compileSdk = 35
+    namespace = "com.basesportperformance"
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.example.basicapp"
-        minSdk = 30
-        targetSdk = 35
+        applicationId = "com.basesportperformance"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -31,11 +31,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    kotlin {
+        jvmToolchain(17)
     }
     buildFeatures {
         compose = true
@@ -54,19 +54,19 @@ dependencies {
     implementation(libs.androidx.material3)
 
     // Compose navigation
-    implementation(libs.androidx.navigation.compose.v284)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 
     // Lifecycle
-    implementation(libs.androidx.lifecycle.viewmodel.compose.v284)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     // Coroutines
-    implementation(libs.kotlinx.coroutines.android.v181)
+    implementation(libs.kotlinx.coroutines.android)
 
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
-    implementation(libs.androidx.hilt.navigation.compose.v120)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     // OkHttp
     implementation(libs.okhttp)
@@ -76,7 +76,7 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
     testImplementation(libs.okhttp.mockwebserver)
-    testImplementation(libs.kotlinx.coroutines.test.v181)
+    testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk)
     testImplementation(libs.turbine)
     testImplementation(libs.hilt.android.testing)

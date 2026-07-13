@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "BasicApp"
+rootProject.name = "BaseSportPerformance"
 include(":app")
  
