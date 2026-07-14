@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 internal data object Activate
 
 @Serializable
-internal data object Main
+internal data object SportsRecords
 
 @Serializable
 internal data object Scratch

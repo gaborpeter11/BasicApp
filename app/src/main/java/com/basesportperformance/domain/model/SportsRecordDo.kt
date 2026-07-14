@@ -1,0 +1,12 @@
+package com.basesportperformance.domain.model
+
+@Suppress("unused")
+data class SportsRecordDo(
+    val id: Long,
+    val name: String,
+    val time: String,
+    val type: String,
+    val source: SportsRecordSource
+)
+
+

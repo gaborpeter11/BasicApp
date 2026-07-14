@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">BaseSportPerformance</string>
+    <string name="sports_records_title">Sports Records</string>
+    <string name="sports_records_tab_all">All</string>
+    <string name="sports_records_tab_local">Local</string>
+    <string name="sports_records_tab_remote">Remote</string>
+    <string name="sports_records_empty">No sports records available.</string>
+    <string name="sports_record_time">Time</string>
+    <string name="sports_record_type">Type</string>
+    <string name="sports_records_loading_title">Loading sports records</string>
+    <string name="sports_records_loading_message">Please wait while we prepare your latest activities.</string>
+    <string name="sports_records_empty_title">No records yet</string>
+    <string name="sports_records_empty_message">Your sports results will appear here once they are available.</string>
+    <string name="sports_records_error_title">Couldn’t load records</string>
+    <string name="sports_records_retry">Retry</string>
+    <string name="sports_records_add_record">Add record</string>
 </resources>

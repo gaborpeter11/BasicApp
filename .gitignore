@@ -16,3 +16,5 @@
 /captures
 .externalNativeBuild
 .cxx
+/.idea/copilotDiffState.xml
+/.idea/inspectionProfiles/Project_Default.xml
