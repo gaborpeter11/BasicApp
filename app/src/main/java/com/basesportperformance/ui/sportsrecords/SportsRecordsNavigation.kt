@@ -6,11 +6,11 @@ import com.basesportperformance.navigation.SportsRecords
 
 
 internal fun NavGraphBuilder.sportsRecordsScreen(
-    onNavigateToScratch: () -> Unit
+    onNavigateToAddRecord: () -> Unit
 ) {
     composable<SportsRecords> {
         SportsRecordsRoute(
-            onNavigateToScratch = onNavigateToScratch
+            onNavigateToAddRecord = onNavigateToAddRecord
         )
     }
 }

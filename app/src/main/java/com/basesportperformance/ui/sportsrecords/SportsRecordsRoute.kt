@@ -8,7 +8,7 @@ import com.basesportperformance.ui.sportsrecords.model.SportsRecordsAction
 
 @Composable
 fun SportsRecordsRoute(
-    onNavigateToScratch: () -> Unit,
+    onNavigateToAddRecord: () -> Unit,
     sportsRecordsViewModel: SportsRecordsViewModel = hiltViewModel()
 ) {
     val uiState by sportsRecordsViewModel.uiState.collectAsState()
@@ -17,7 +17,7 @@ fun SportsRecordsRoute(
         uiState = uiState,
         onAction = { action ->
             when (action) {
-                SportsRecordsAction.AddRecord -> onNavigateToScratch()
+                SportsRecordsAction.AddRecord -> onNavigateToAddRecord()
                 else -> sportsRecordsViewModel.onAction(action)
             }
         }

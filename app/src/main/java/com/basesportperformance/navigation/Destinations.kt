@@ -9,4 +9,4 @@ internal data object Activate
 internal data object SportsRecords
 
 @Serializable
-internal data object Scratch
+internal data object AddRecord

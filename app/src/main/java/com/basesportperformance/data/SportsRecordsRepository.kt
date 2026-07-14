@@ -12,7 +12,7 @@ class SportsRecordsRepository @Inject constructor() {
 
     @Suppress("unused")
     suspend fun getSportsRecords(): List<SportsRecordDo> {
-        delay(9000)
+        delay(2000)
         return sampleRecords
     }
 

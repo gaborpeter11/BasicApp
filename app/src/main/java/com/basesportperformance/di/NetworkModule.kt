@@ -29,7 +29,7 @@ object NetworkModule {
     @Singleton
     fun provideApiService(client: OkHttpClient): ApiService {
         return HttpApiService(
-            baseUrl = "https://api.o2.sk/",
+            baseUrl = "https://api.test.sk/",
             client = client
         )
     }

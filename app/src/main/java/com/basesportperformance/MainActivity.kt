@@ -5,11 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
 import com.basesportperformance.navigation.AppNavHost
-import com.basesportperformance.navigation.Scratch
+import com.basesportperformance.navigation.AddRecord
 import com.basesportperformance.navigation.SportsRecords
 import com.basesportperformance.ui.activate.activateScreen
+import com.basesportperformance.ui.addrecord.addRecordScreen
 import com.basesportperformance.ui.sportsrecords.sportsRecordsScreen
-import com.basesportperformance.ui.scratch.scratchScreen
 import com.basesportperformance.ui.theme.BaseSportPerformanceTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,8 +27,8 @@ class MainActivity : ComponentActivity() {
                     startDestination = startDestination
                 ) {
                     sportsRecordsScreen(
-                        onNavigateToScratch = {
-                            navController.navigate(Scratch)
+                        onNavigateToAddRecord = {
+                            navController.navigate(AddRecord)
                         }
                     )
 
@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                         onClose = { navController.popBackStack() }
                     )
 
-                    scratchScreen(
+                    addRecordScreen(
                         onClose = { navController.popBackStack() }
                     )
                 }
