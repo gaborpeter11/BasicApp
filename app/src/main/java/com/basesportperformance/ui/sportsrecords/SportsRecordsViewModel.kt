@@ -14,6 +14,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -84,31 +85,25 @@ class SportsRecordsViewModel @Inject constructor(
         }
 
         loadJob = viewModelScope.launch {
-            runCatching {
-                getSportsRecordsUseCase()
-            }.onSuccess { records ->
-
-                cachedRecords =
-                    records.map { it.toUiModel() }
-
-                publishContentState()
-
-            }.onFailure { throwable ->
-
-                if (cachedRecords.isNotEmpty()) {
+            getSportsRecordsUseCase()
+                .catch { throwable ->
+                    if (cachedRecords.isNotEmpty()) {
+                        publishContentState()
+                    } else {
+                        _uiState.value =
+                            SportsRecordsUiState.Error(
+                                message = throwable.message
+                                    ?: "Unable to load sports records.",
+                                selectedTab = currentTab
+                            )
+                    }
+                }
+                .collect { records ->
+                    cachedRecords =
+                        records.map { it.toUiModel() }
 
                     publishContentState()
-
-                } else {
-
-                    _uiState.value =
-                        SportsRecordsUiState.Error(
-                            message = throwable.message
-                                ?: "Unable to load sports records.",
-                            selectedTab = currentTab
-                        )
                 }
-            }
         }
     }
 

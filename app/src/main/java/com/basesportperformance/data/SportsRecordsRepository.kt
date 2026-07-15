@@ -1,47 +1,65 @@
 package com.basesportperformance.data
 
-import com.basesportperformance.domain.model.SportsRecordDo
+import com.basesportperformance.data.local.SportsRecordsDao
+import com.basesportperformance.data.local.toDomain
+import com.basesportperformance.data.local.toEntity
+import com.basesportperformance.domain.model.SportsRecordDto
 import com.basesportperformance.domain.model.SportsRecordSource
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Suppress("unused")
 @Singleton
-class SportsRecordsRepository @Inject constructor() {
+class SportsRecordsRepository @Inject constructor(
+    private val sportsRecordsDao: SportsRecordsDao
+) {
+    fun observeSportsRecords(): Flow<List<SportsRecordDto>> {
+        return sportsRecordsDao
+            .observeSportsRecords()
+            .map { it.toDomain() }
+    }
 
-    @Suppress("unused")
-    suspend fun getSportsRecords(): List<SportsRecordDo> {
-        delay(2000)
-        return sampleRecords
+    suspend fun saveSportsRecord(record: SportsRecordDto) {
+        sportsRecordsDao.insertSportsRecord(record.toEntity())
+    }
+
+    internal suspend fun seedSampleRecordsIfNeeded() {
+        if (sportsRecordsDao.getCount() > 0) return
+
+        sportsRecordsDao.insertSportsRecords(SAMPLE_RECORDS.map { it.toEntity() })
     }
 
     private companion object {
-        val sampleRecords = listOf(
-            SportsRecordDo(
+        val SAMPLE_RECORDS = listOf(
+            SportsRecordDto(
                 id = 1,
                 name = "Morning Run",
+                location = "City Park Track",
                 time = "00:42:18",
                 type = "Running",
                 source = SportsRecordSource.Local
             ),
-            SportsRecordDo(
+            SportsRecordDto(
                 id = 2,
                 name = "Pool Sprint",
+                location = "Aquatic Center",
                 time = "00:18:44",
                 type = "Swimming",
                 source = SportsRecordSource.Remote
             ),
-            SportsRecordDo(
+            SportsRecordDto(
                 id = 3,
                 name = "Hill Climb",
+                location = "North Ridge",
                 time = "01:12:03",
                 type = "Cycling",
                 source = SportsRecordSource.Local
             ),
-            SportsRecordDo(
+            SportsRecordDto(
                 id = 4,
                 name = "Evening Recovery",
+                location = "River Row Club",
                 time = "00:27:51",
                 type = "Rowing",
                 source = SportsRecordSource.Remote

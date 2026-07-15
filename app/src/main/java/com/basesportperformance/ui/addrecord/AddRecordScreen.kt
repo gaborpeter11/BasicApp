@@ -62,7 +62,7 @@ fun AddRecordScreen(
     onClose: () -> Unit
 ) {
 
-    val DURATION_FORMAT = "%02d:%02d:%02d"
+    val durationFormat = "%02d:%02d:%02d"
 
     var isSportExpanded by rememberSaveable { mutableStateOf(false) }
     var showDurationPicker by rememberSaveable { mutableStateOf(false) }
@@ -91,7 +91,7 @@ fun AddRecordScreen(
                 onDurationChanged(
                     String.format(
                         Locale.getDefault(),
-                        DURATION_FORMAT,
+                        durationFormat,
                         selectedHours,
                         selectedMinutes,
                         selectedSeconds

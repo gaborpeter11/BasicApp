@@ -1,21 +1,38 @@
 package com.basesportperformance.ui.addrecord
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.basesportperformance.domain.usecase.SaveSportsRecordUseCase
+import com.basesportperformance.ui.addrecord.mapper.toSaveSportsRecordParams
 import com.basesportperformance.ui.addrecord.model.AddRecordUiState
 import com.basesportperformance.ui.addrecord.model.SportType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddRecordViewModel @Inject constructor() : ViewModel() {
+class AddRecordViewModel @Inject constructor(
+    private val saveSportsRecordUseCase: SaveSportsRecordUseCase
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AddRecordUiState())
     val uiState = _uiState.asStateFlow()
+    private val _navigationEvents = MutableSharedFlow<Unit>()
+    val navigationEvents = _navigationEvents.asSharedFlow()
 
-    fun addRecord() = Unit  //TODO: close screen on success/failure
+    fun addRecord() {
+        val currentState = _uiState.value
+
+        viewModelScope.launch {
+            saveSportsRecordUseCase(currentState.toSaveSportsRecordParams())
+            _navigationEvents.emit(Unit)
+        }
+    }
 
     fun onSportSelected(sport: SportType) {
         updateState { copy(selectedSport = sport) }
@@ -60,3 +77,4 @@ class AddRecordViewModel @Inject constructor() : ViewModel() {
         const val LOCATION_PLACEHOLDER = "Current location"
     }
 }
+

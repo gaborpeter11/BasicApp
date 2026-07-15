@@ -2,6 +2,7 @@ package com.basesportperformance.ui.addrecord
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -14,6 +15,12 @@ fun AddRecordRoute(
     BackHandler { onClose() }
 
     val uiState by addRecordViewModel.uiState.collectAsState()
+
+    LaunchedEffect(addRecordViewModel) {
+        addRecordViewModel.navigationEvents.collect {
+            onClose()
+        }
+    }
 
     AddRecordScreen(
         uiState = uiState,

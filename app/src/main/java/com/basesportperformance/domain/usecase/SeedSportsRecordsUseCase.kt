@@ -3,9 +3,11 @@ package com.basesportperformance.domain.usecase
 import com.basesportperformance.data.SportsRecordsRepository
 import javax.inject.Inject
 
-class GetSportsRecordsUseCase @Inject constructor(
+class SeedSportsRecordsUseCase @Inject constructor(
     private val sportsRecordsRepository: SportsRecordsRepository
 ) {
-    operator fun invoke() = sportsRecordsRepository.observeSportsRecords()
+    suspend operator fun invoke() {
+        sportsRecordsRepository.seedSampleRecordsIfNeeded()
+    }
 }
 

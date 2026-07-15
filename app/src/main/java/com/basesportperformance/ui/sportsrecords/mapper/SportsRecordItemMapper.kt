@@ -1,9 +1,9 @@
 package com.basesportperformance.ui.sportsrecords.mapper
 
-import com.basesportperformance.domain.model.SportsRecordDo
+import com.basesportperformance.domain.model.SportsRecordDto
 import com.basesportperformance.ui.sportsrecords.model.SportsRecord
 
-internal fun SportsRecordDo.toUiModel(): SportsRecord = SportsRecord(
+internal fun SportsRecordDto.toUiModel(): SportsRecord = SportsRecord(
     id = id,
     name = name,
     time = time,
