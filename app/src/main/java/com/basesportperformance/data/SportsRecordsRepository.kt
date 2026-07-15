@@ -34,7 +34,6 @@ class SportsRecordsRepository @Inject constructor(
         val SAMPLE_RECORDS = listOf(
             SportsRecordDto(
                 id = 1,
-                name = "Morning Run",
                 location = "City Park Track",
                 time = "00:42:18",
                 type = "Running",
@@ -42,7 +41,6 @@ class SportsRecordsRepository @Inject constructor(
             ),
             SportsRecordDto(
                 id = 2,
-                name = "Pool Sprint",
                 location = "Aquatic Center",
                 time = "00:18:44",
                 type = "Swimming",
@@ -50,7 +48,6 @@ class SportsRecordsRepository @Inject constructor(
             ),
             SportsRecordDto(
                 id = 3,
-                name = "Hill Climb",
                 location = "North Ridge",
                 time = "01:12:03",
                 type = "Cycling",
@@ -58,7 +55,6 @@ class SportsRecordsRepository @Inject constructor(
             ),
             SportsRecordDto(
                 id = 4,
-                name = "Evening Recovery",
                 location = "River Row Club",
                 time = "00:27:51",
                 type = "Rowing",

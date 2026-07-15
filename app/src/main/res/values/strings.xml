@@ -14,6 +14,8 @@
     <string name="sports_records_error_title">Couldn’t load records</string>
     <string name="sports_records_retry">Retry</string>
     <string name="sports_records_add_record">Add record</string>
+    <string name="sports_records_summary_count">Records</string>
+    <string name="sports_records_summary_time">Total time</string>
     <string name="add_record_title">Add Record</string>
     <string name="add_record_description">Create a new sports activity.</string>
     <string name="add_record_cancel">Cancel</string>

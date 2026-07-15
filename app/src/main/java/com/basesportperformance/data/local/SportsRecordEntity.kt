@@ -9,7 +9,6 @@ import com.basesportperformance.domain.model.SportsRecordSource
 data class SportsRecordEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val name: String,
     val location: String,
     val time: String,
     val type: String,
@@ -18,7 +17,6 @@ data class SportsRecordEntity(
 
 fun SportsRecordEntity.toDomainModel(): SportsRecordDto = SportsRecordDto(
     id = id,
-    name = name,
     location = location,
     time = time,
     type = type,
@@ -30,7 +28,6 @@ fun List<SportsRecordEntity>.toDomain(): List<SportsRecordDto> =
 
 fun SportsRecordDto.toEntity(): SportsRecordEntity = SportsRecordEntity(
     id = id,
-    name = name,
     location = location,
     time = time,
     type = type,

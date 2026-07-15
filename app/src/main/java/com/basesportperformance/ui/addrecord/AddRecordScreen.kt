@@ -12,9 +12,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.CloudQueue
+import androidx.compose.material.icons.filled.PhoneAndroid
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
@@ -28,6 +31,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -38,14 +42,18 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.basesportperformance.R
 import com.basesportperformance.ui.addrecord.model.AddRecordUiState
 import com.basesportperformance.ui.addrecord.model.SportType
+import com.basesportperformance.ui.common.color
+import com.basesportperformance.ui.common.icon
 import com.basesportperformance.ui.theme.BaseSportPerformanceTheme
 import java.util.Locale
 
@@ -106,7 +114,10 @@ fun AddRecordScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(stringResource(R.string.add_record_title))
+                    Text(
+                        text = stringResource(R.string.add_record_title),
+                        fontWeight = FontWeight.Bold
+                    )
                 },
                 navigationIcon = {
                     IconButton(onClick = onClose) {
@@ -123,12 +134,20 @@ fun AddRecordScreen(
             Button(
                 onClick = onAddRecord,
                 enabled = uiState.isAddRecordEnabled,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiary,
+                    contentColor = MaterialTheme.colorScheme.onTertiary
+                ),
+                shape = MaterialTheme.shapes.large,
                 modifier = Modifier
                     .fillMaxWidth()
                     .navigationBarsPadding()
                     .padding(horizontal = 16.dp, vertical = 20.dp)
             ) {
-                Text(stringResource(R.string.sports_records_add_record))
+                Text(
+                    text = stringResource(R.string.sports_records_add_record),
+                    style = MaterialTheme.typography.titleMedium
+                )
             }
         }
     ) { padding ->
@@ -149,6 +168,7 @@ fun AddRecordScreen(
 
             Card(
                 modifier = Modifier.fillMaxWidth(),
+                shape = MaterialTheme.shapes.large,
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
             ) {
 
@@ -170,6 +190,13 @@ fun AddRecordScreen(
                             label = {
                                 Text(stringResource(R.string.add_record_sport_label))
                             },
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = uiState.selectedSport.icon(),
+                                    contentDescription = null,
+                                    tint = uiState.selectedSport.color()
+                                )
+                            },
                             trailingIcon = {
                                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = isSportExpanded)
                             },
@@ -183,6 +210,13 @@ fun AddRecordScreen(
                             SportType.entries.forEach { sport ->
                                 DropdownMenuItem(
                                     text = { Text(sport.label()) },
+                                    leadingIcon = {
+                                        Icon(
+                                            imageVector = sport.icon(),
+                                            contentDescription = null,
+                                            tint = sport.color()
+                                        )
+                                    },
                                     onClick = {
                                         onSportSelected(sport)
                                         isSportExpanded = false
@@ -236,6 +270,7 @@ fun AddRecordScreen(
 
             Card(
                 modifier = Modifier.fillMaxWidth(),
+                shape = MaterialTheme.shapes.large,
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
             ) {
 
@@ -243,8 +278,18 @@ fun AddRecordScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
+                    Icon(
+                        imageVector = if (uiState.storeLocally) {
+                            Icons.Filled.PhoneAndroid
+                        } else {
+                            Icons.Filled.CloudQueue
+                        },
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
 
                     Column(
                         modifier = Modifier.weight(1f)
@@ -270,7 +315,11 @@ fun AddRecordScreen(
                         checked = !uiState.storeLocally,
                         onCheckedChange = { isOnlineStorageEnabled ->
                             onStoreLocallyChanged(!isOnlineStorageEnabled)
-                        }
+                        },
+                        colors = SwitchDefaults.colors(
+                            checkedTrackColor = MaterialTheme.colorScheme.tertiary,
+                            checkedThumbColor = MaterialTheme.colorScheme.onTertiary
+                        )
                     )
                 }
             }

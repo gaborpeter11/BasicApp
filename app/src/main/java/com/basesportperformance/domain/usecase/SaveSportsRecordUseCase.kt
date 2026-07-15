@@ -13,7 +13,6 @@ class SaveSportsRecordUseCase @Inject constructor(
         sportsRecordsRepository.saveSportsRecord(
             SportsRecordDto(
                 id = 0,
-                name = params.sport,
                 location = params.location,
                 time = params.duration,
                 type = params.sport,
