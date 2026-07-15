@@ -2,6 +2,7 @@ package com.basesportperformance.data
 
 import com.basesportperformance.data.local.SportsRecordsDao
 import com.basesportperformance.data.local.toDomain
+import com.basesportperformance.data.local.toDomainModel
 import com.basesportperformance.data.local.toEntity
 import com.basesportperformance.domain.model.SportsRecordDto
 import com.basesportperformance.domain.model.SportsRecordSource
@@ -18,6 +19,12 @@ class SportsRecordsRepository @Inject constructor(
         return sportsRecordsDao
             .observeSportsRecords()
             .map { it.toDomain() }
+    }
+
+    fun observeSportsRecord(id: Long): Flow<SportsRecordDto?> {
+        return sportsRecordsDao
+            .observeSportsRecord(id)
+            .map { it?.toDomainModel() }
     }
 
     suspend fun saveSportsRecord(record: SportsRecordDto) {

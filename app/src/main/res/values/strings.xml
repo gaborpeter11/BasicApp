@@ -40,4 +40,7 @@
     <string name="add_record_sport_gym">Gym</string>
     <string name="add_record_sport_other">Other</string>
     <string name="back">Back</string>
+    <string name="record_detail_title">Record Details</string>
+    <string name="record_detail_not_found_title">Record not found</string>
+    <string name="record_detail_not_found_message">This record may have been removed.</string>
 </resources>

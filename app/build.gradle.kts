@@ -74,14 +74,9 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
-    // OkHttp
-    implementation(libs.okhttp)
-    implementation(libs.okhttp.logging)
-
     // testing
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
-    testImplementation(libs.okhttp.mockwebserver)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk)
     testImplementation(libs.turbine)

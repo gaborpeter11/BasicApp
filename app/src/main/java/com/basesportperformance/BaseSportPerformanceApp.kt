@@ -1,4 +1,4 @@
-package com.basesportperformance.helpers
+package com.basesportperformance
 
 import android.app.Application
 import com.basesportperformance.domain.usecase.SeedSportsRecordsUseCase
@@ -25,4 +25,3 @@ class BaseSportPerformanceApp : Application() {
 		}
 	}
 }
-

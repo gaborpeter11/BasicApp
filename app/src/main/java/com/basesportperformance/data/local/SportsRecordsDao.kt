@@ -12,6 +12,9 @@ interface SportsRecordsDao {
     @Query("SELECT * FROM sports_records ORDER BY id DESC")
     fun observeSportsRecords(): Flow<List<SportsRecordEntity>>
 
+    @Query("SELECT * FROM sports_records WHERE id = :id")
+    fun observeSportsRecord(id: Long): Flow<SportsRecordEntity?>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSportsRecord(record: SportsRecordEntity)
 

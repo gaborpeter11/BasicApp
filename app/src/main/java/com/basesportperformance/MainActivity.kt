@@ -6,9 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
 import com.basesportperformance.navigation.AppNavHost
 import com.basesportperformance.navigation.AddRecord
+import com.basesportperformance.navigation.RecordDetail
 import com.basesportperformance.navigation.SportsRecords
-import com.basesportperformance.ui.activate.activateScreen
 import com.basesportperformance.ui.addrecord.addRecordScreen
+import com.basesportperformance.ui.recorddetail.recordDetailScreen
 import com.basesportperformance.ui.sportsrecords.sportsRecordsScreen
 import com.basesportperformance.ui.theme.BaseSportPerformanceTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,14 +30,17 @@ class MainActivity : ComponentActivity() {
                     sportsRecordsScreen(
                         onNavigateToAddRecord = {
                             navController.navigate(AddRecord)
+                        },
+                        onNavigateToRecordDetail = { recordId ->
+                            navController.navigate(RecordDetail(recordId))
                         }
                     )
 
-                    activateScreen(
+                    addRecordScreen(
                         onClose = { navController.popBackStack() }
                     )
 
-                    addRecordScreen(
+                    recordDetailScreen(
                         onClose = { navController.popBackStack() }
                     )
                 }
