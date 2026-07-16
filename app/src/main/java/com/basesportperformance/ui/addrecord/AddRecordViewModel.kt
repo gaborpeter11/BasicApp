@@ -24,13 +24,20 @@ class AddRecordViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
     private val _navigationEvents = MutableSharedFlow<Unit>()
     val navigationEvents = _navigationEvents.asSharedFlow()
+    private val _errorEvents = MutableSharedFlow<Unit>()
+    val errorEvents = _errorEvents.asSharedFlow()
 
     fun addRecord() {
         val currentState = _uiState.value
 
         viewModelScope.launch {
-            saveSportsRecordUseCase(currentState.toSaveSportsRecordParams())
-            _navigationEvents.emit(Unit)
+            runCatching {
+                saveSportsRecordUseCase(currentState.toSaveSportsRecordParams())
+            }.onSuccess {
+                _navigationEvents.emit(Unit)
+            }.onFailure {
+                _errorEvents.emit(Unit)
+            }
         }
     }
 

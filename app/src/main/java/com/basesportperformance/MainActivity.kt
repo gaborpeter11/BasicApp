@@ -31,8 +31,8 @@ class MainActivity : ComponentActivity() {
                         onNavigateToAddRecord = {
                             navController.navigate(AddRecord)
                         },
-                        onNavigateToRecordDetail = { recordId ->
-                            navController.navigate(RecordDetail(recordId))
+                        onNavigateToRecordDetail = { recordId, source ->
+                            navController.navigate(RecordDetail(recordId, source))
                         }
                     )
 

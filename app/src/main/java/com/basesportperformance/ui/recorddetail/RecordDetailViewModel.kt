@@ -21,8 +21,10 @@ class RecordDetailViewModel @Inject constructor(
     getSportsRecordByIdUseCase: GetSportsRecordByIdUseCase
 ) : ViewModel() {
 
+    private val route = savedStateHandle.toRoute<RecordDetail>()
+
     val uiState: StateFlow<RecordDetailUiState> =
-        getSportsRecordByIdUseCase(savedStateHandle.toRoute<RecordDetail>().id)
+        getSportsRecordByIdUseCase(route.id, route.source)
             .map { record -> record?.toDetailUiState() ?: RecordDetailUiState.NotFound }
             .stateIn(
                 scope = viewModelScope,

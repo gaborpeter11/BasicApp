@@ -145,7 +145,7 @@ fun SportsRecordsScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 record = record,
                                 onClick = {
-                                    onAction(SportsRecordsAction.RecordClicked(record.id))
+                                    onAction(SportsRecordsAction.RecordClicked(record.id, record.source))
                                 }
                             )
                         }

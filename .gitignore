@@ -18,3 +18,4 @@
 .cxx
 /.idea/copilotDiffState.xml
 /.idea/inspectionProfiles/Project_Default.xml
+/app/google-services.json

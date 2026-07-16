@@ -1,8 +1,10 @@
 package com.basesportperformance.ui.sportsrecords.model
 
+import com.basesportperformance.domain.model.SportsRecordSource
+
 sealed interface SportsRecordsAction {
     data object Retry : SportsRecordsAction
     data object AddRecord : SportsRecordsAction
     data class TabSelected(val tab: SportsRecordsTab) : SportsRecordsAction
-    data class RecordClicked(val recordId: Long) : SportsRecordsAction
+    data class RecordClicked(val recordId: String, val source: SportsRecordSource) : SportsRecordsAction
 }

@@ -16,7 +16,7 @@ data class SportsRecordEntity(
 )
 
 fun SportsRecordEntity.toDomainModel(): SportsRecordDto = SportsRecordDto(
-    id = id,
+    id = id.toString(),
     location = location,
     time = time,
     type = type,
@@ -27,7 +27,7 @@ fun List<SportsRecordEntity>.toDomain(): List<SportsRecordDto> =
     map { it.toDomainModel() }
 
 fun SportsRecordDto.toEntity(): SportsRecordEntity = SportsRecordEntity(
-    id = id,
+    id = id.toLongOrNull() ?: 0L,
     location = location,
     time = time,
     type = type,

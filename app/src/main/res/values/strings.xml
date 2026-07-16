@@ -28,6 +28,7 @@
     <string name="add_record_storage_remote">Store remotely</string>
     <string name="add_record_storage_local_description">Sync only on this device</string>
     <string name="add_record_storage_remote_description">Send  this record on Firebase</string>
+    <string name="add_record_save_error">Couldn\'t save the record. Please try again.</string>
     <string name="add_record_duration_picker_title">Choose duration</string>
     <string name="add_record_duration_picker_confirm">OK</string>
     <string name="add_record_hours_label">Hours</string>

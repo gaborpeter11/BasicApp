@@ -30,6 +30,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
@@ -40,6 +42,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -67,7 +70,8 @@ fun AddRecordScreen(
     onDurationChanged: (String) -> Unit,
     onStoreLocallyChanged: (Boolean) -> Unit,
     onAddRecord: () -> Unit,
-    onClose: () -> Unit
+    onClose: () -> Unit,
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() }
 ) {
 
     val durationFormat = "%02d:%02d:%02d"
@@ -111,6 +115,7 @@ fun AddRecordScreen(
     }
 
     Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             TopAppBar(
                 title = {

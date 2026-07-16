@@ -12,7 +12,7 @@ class SaveSportsRecordUseCase @Inject constructor(
     suspend operator fun invoke(params: SaveSportsRecordParams) {
         sportsRecordsRepository.saveSportsRecord(
             SportsRecordDto(
-                id = 0,
+                id = "",
                 location = params.location,
                 time = params.duration,
                 type = params.sport,
